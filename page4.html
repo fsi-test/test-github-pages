@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送信後ページ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>フォーム送信後ページ</h1>
+            <p class="subtitle">フォーム送信後のページです</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>送信されたデータ</h2>
+                <div id="result">
+                    <p><strong>テキスト入力:</strong> <span id="displayText">-</span></p>
+                    <p><strong>選択:</strong> <span id="displaySelect">-</span></p>
+                </div>
+            </section>
+
+            <section>
+                <h2>ナビゲーション</h2>
+                <p><a href="page3.html">フォームに戻る</a></p>
+                <p><a href="index.html">トップページに戻る</a></p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // URLパラメータからデータを取得して表示
+        const urlParams = new URLSearchParams(window.location.search);
+        const textInput = urlParams.get('testInput');
+        const selectValue = urlParams.get('testSelect');
+
+        if (textInput) {
+            document.getElementById('displayText').textContent = textInput;
+        }
+
+        if (selectValue) {
+            const selectLabels = {
+                'option1': 'オプション1',
+                'option2': 'オプション2',
+                'option3': 'オプション3'
+            };
+            document.getElementById('displaySelect').textContent = selectLabels[selectValue] || selectValue;
+        }
+    </script>
+</body>
+</html>
