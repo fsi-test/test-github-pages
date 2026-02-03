@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background: #fff;
+    padding: 20px;
+    color: #000;
+}
+
+/* コンテナ */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+/* ヘッダー */
+header {
+    background: #f0f0f0;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+}
+
+/* メインコンテンツ */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* フォーム */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: 1px solid #000;
+}
+
+/* ボタン */
+.btn {
+    padding: 8px 16px;
+    border: 1px solid #000;
+    background: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #f0f0f0;
+}
+
+.btn-primary {
+    background: #e0e0e0;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+}
+
+.btn-danger {
+    background: #e0e0e0;
+}
+
+.btn-warning {
+    background: #e0e0e0;
+}
+
+.btn-filter {
+    background: #fff;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.btn-filter.active {
+    background: #d0d0d0;
+}
+
+/* コントロールセクション */
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+/* タスクリスト */
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-left: 2px solid #000;
+}
+
+.task-item.completed {
+    opacity: 0.6;
+}
+
+.task-item.priority-high {
+    border-left-color: #000;
+}
+
+.task-item.priority-medium {
+    border-left-color: #666;
+}
+
+.task-item.priority-low {
+    border-left-color: #999;
+}
+
+.task-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 1rem;
+}
+
+.task-item.completed .task-title {
+    text-decoration: line-through;
+}
+
+.task-priority {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    background: #e0e0e0;
+}
+
+.delete-btn {
+    background: #e0e0e0;
+    border: 1px solid #000;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* 空のメッセージ */
+.empty-message {
+    text-align: center;
+    padding: 20px;
+}
+
+/* ローディング */
+.loading {
+    text-align: center;
+    padding: 20px;
+}
+
+/* アクションセクション */
+.actions-section {
+    display: flex;
+    gap: 10px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #000;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-body {
+    margin-top: 20px;
+}
+
+.modal-body ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.modal-body li {
+    margin: 5px 0;
+}
+
+/* リンクのスタイル */
+a {
+    color: #00f;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+a:hover {
+    text-decoration: none;
+}
