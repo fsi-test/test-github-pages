@@ -199,6 +199,57 @@ h3 {
     font-size: 0.9rem;
 }
 
+.edit-btn {
+    background: #e0e0e0;
+    border: 1px solid #000;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* タスク編集 */
+.task-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #000;
+    font-size: 1rem;
+}
+
+.edit-input:focus {
+    outline: 2px solid #000;
+}
+
+.save-btn {
+    background: #d0d0d0;
+    border: 1px solid #000;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.save-btn:hover {
+    background: #c0c0c0;
+}
+
+.cancel-btn {
+    background: #e0e0e0;
+    border: 1px solid #000;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.cancel-btn:hover {
+    background: #d0d0d0;
+}
+
 /* 空のメッセージ */
 .empty-message {
     text-align: center;
