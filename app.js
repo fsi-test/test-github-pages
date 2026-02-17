@@ -86,10 +86,18 @@ function renderTasks() {
             >
             <div class="task-content">
                 <div class="task-title">${escapeHtml(task.title)}</div>
+                <div class="task-edit" style="display: none;">
+                    <input type="text" class="edit-input" value="${escapeHtml(task.title)}">
+                    <button class="save-btn">保存</button>
+                    <button class="cancel-btn">キャンセル</button>
+                </div>
                 <span class="task-priority priority-${task.priority}">
                     優先度: ${getPriorityLabel(task.priority)}
                 </span>
             </div>
+            <button class="edit-btn">
+                ✏️ 編集
+            </button>
             <button class="delete-btn">
                 🗑️ 削除
             </button>
@@ -108,6 +116,29 @@ function renderTasks() {
         btn.addEventListener('click', (e) => {
             const taskId = parseInt(e.target.closest('.task-item').dataset.taskId);
             deleteTask(taskId);
+        });
+    });
+    
+    taskList.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const taskItem = e.target.closest('.task-item');
+            const taskId = parseInt(taskItem.dataset.taskId);
+            startEditTask(taskItem, taskId);
+        });
+    });
+    
+    taskList.querySelectorAll('.save-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const taskItem = e.target.closest('.task-item');
+            const taskId = parseInt(taskItem.dataset.taskId);
+            saveEditTask(taskItem, taskId);
+        });
+    });
+    
+    taskList.querySelectorAll('.cancel-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const taskItem = e.target.closest('.task-item');
+            cancelEditTask(taskItem);
         });
     });
 }
@@ -129,6 +160,54 @@ function deleteTask(id) {
         saveTasks();
         updateUI();
     }
+}
+
+// タスクの編集開始
+function startEditTask(taskItem, id) {
+    const taskTitle = taskItem.querySelector('.task-title');
+    const taskEdit = taskItem.querySelector('.task-edit');
+    const editBtn = taskItem.querySelector('.edit-btn');
+    const deleteBtn = taskItem.querySelector('.delete-btn');
+    
+    taskTitle.style.display = 'none';
+    taskEdit.style.display = 'flex';
+    editBtn.style.display = 'none';
+    deleteBtn.style.display = 'none';
+    
+    const input = taskEdit.querySelector('.edit-input');
+    input.focus();
+    input.select();
+}
+
+// タスクの編集保存
+function saveEditTask(taskItem, id) {
+    const input = taskItem.querySelector('.edit-input');
+    const newTitle = input.value.trim();
+    
+    if (newTitle === '') {
+        alert('タスク名を入力してください。');
+        return;
+    }
+    
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.title = newTitle;
+        saveTasks();
+        updateUI();
+    }
+}
+
+// タスクの編集キャンセル
+function cancelEditTask(taskItem) {
+    const taskTitle = taskItem.querySelector('.task-title');
+    const taskEdit = taskItem.querySelector('.task-edit');
+    const editBtn = taskItem.querySelector('.edit-btn');
+    const deleteBtn = taskItem.querySelector('.delete-btn');
+    
+    taskTitle.style.display = 'block';
+    taskEdit.style.display = 'none';
+    editBtn.style.display = 'inline-block';
+    deleteBtn.style.display = 'inline-block';
 }
 
 // フィルタリング
