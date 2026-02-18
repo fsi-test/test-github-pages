@@ -191,6 +191,22 @@ h3 {
     background: #e0e0e0;
 }
 
+/* タグ表示 */
+.task-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    background: #d0d0d0;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
 .delete-btn {
     background: #e0e0e0;
     border: 1px solid #000;
@@ -210,7 +226,7 @@ h3 {
 /* タスク編集 */
 .task-edit {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
     margin-top: 8px;
 }
@@ -224,6 +240,22 @@ h3 {
 
 .edit-input:focus {
     outline: 2px solid #000;
+}
+
+.edit-tags-input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #999;
+    font-size: 0.9rem;
+}
+
+.edit-tags-input:focus {
+    outline: 2px solid #999;
+}
+
+.task-edit-buttons {
+    display: flex;
+    gap: 8px;
 }
 
 .save-btn {

@@ -9,6 +9,7 @@ let nextId = 1;
 const taskForm = document.getElementById('taskForm');
 const taskInput = document.getElementById('taskInput');
 const prioritySelect = document.getElementById('prioritySelect');
+const tagsInput = document.getElementById('tagsInput');
 const taskList = document.getElementById('taskList');
 const emptyMessage = document.getElementById('emptyMessage');
 const loadingIndicator = document.getElementById('loadingIndicator');
@@ -37,6 +38,8 @@ taskForm.addEventListener('submit', (e) => {
     
     const title = taskInput.value.trim();
     const priority = prioritySelect.value;
+    const tagsText = tagsInput.value.trim();
+    const tags = tagsText ? tagsText.split(',').map(tag => tag.trim()).filter(tag => tag) : [];
     
     if (title === '') return;
     
@@ -49,6 +52,7 @@ taskForm.addEventListener('submit', (e) => {
             id: nextId++,
             title: title,
             priority: priority,
+            tags: tags,
             completed: false,
             createdAt: new Date().toISOString()
         };
@@ -58,6 +62,7 @@ taskForm.addEventListener('submit', (e) => {
         
         taskInput.value = '';
         prioritySelect.value = 'medium';
+        tagsInput.value = '';
         
         hideLoading();
         updateUI();
@@ -88,9 +93,17 @@ function renderTasks() {
                 <div class="task-title">${escapeHtml(task.title)}</div>
                 <div class="task-edit" style="display: none;">
                     <input type="text" class="edit-input" value="${escapeHtml(task.title)}">
-                    <button class="save-btn">保存</button>
-                    <button class="cancel-btn">キャンセル</button>
+                    <input type="text" class="edit-tags-input" value="${task.tags ? task.tags.join(', ') : ''}" placeholder="タグ (カンマ区切り)">
+                    <div class="task-edit-buttons">
+                        <button class="save-btn">保存</button>
+                        <button class="cancel-btn">キャンセル</button>
+                    </div>
                 </div>
+                ${task.tags && task.tags.length > 0 ? `
+                    <div class="task-tags">
+                        ${task.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                ` : ''}
                 <span class="task-priority priority-${task.priority}">
                     優先度: ${getPriorityLabel(task.priority)}
                 </span>
@@ -182,7 +195,10 @@ function startEditTask(taskItem, id) {
 // タスクの編集保存
 function saveEditTask(taskItem, id) {
     const input = taskItem.querySelector('.edit-input');
+    const tagsInput = taskItem.querySelector('.edit-tags-input');
     const newTitle = input.value.trim();
+    const tagsText = tagsInput.value.trim();
+    const newTags = tagsText ? tagsText.split(',').map(tag => tag.trim()).filter(tag => tag) : [];
     
     if (newTitle === '') {
         alert('タスク名を入力してください。');
@@ -192,6 +208,7 @@ function saveEditTask(taskItem, id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
         task.title = newTitle;
+        task.tags = newTags;
         saveTasks();
         updateUI();
     }
