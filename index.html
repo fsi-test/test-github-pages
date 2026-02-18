@@ -43,6 +43,15 @@
                             <option value="high">高</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="tagsInput">タグ (カンマ区切り):</label>
+                        <input 
+                            type="text" 
+                            id="tagsInput" 
+                            name="tags"
+                            placeholder="例: 仕事, 重要, 今日"
+                        >
+                    </div>
                     <button type="submit" id="addTaskBtn" class="btn btn-primary">
                         タスクを追加
                     </button>
@@ -102,8 +111,9 @@
                 <p>このアプリケーションは、テストを検証するためのサンプルシステムです。</p>
                 <ul>
                     <li>タスク名と優先度を入力してタスクを追加できます</li>
+                    <li>タグをカンマ区切りで追加できます（例: 仕事, 重要）</li>
                     <li>チェックボックスでタスクを完了としてマークできます</li>
-                    <li>✏️ 編集ボタンでタスク名を編集できます</li>
+                    <li>✏️ 編集ボタンでタスク名とタグを編集できます</li>
                     <li>ゴミ箱アイコンでタスクを削除できます</li>
                     <li>フィルターボタンでタスクを絞り込めます</li>
                 </ul>
