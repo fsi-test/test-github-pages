@@ -38,7 +38,53 @@
                     <button type="submit" class="btn btn-primary">送信</button>
                 </form>
             </section>
+
+            <section>
+                <h2>送信履歴</h2>
+                <ul id="historyList" style="list-style:none;padding:0;"></ul>
+                <p id="historyEmpty" style="color:#888;">送信履歴がありません。</p>
+                <button id="clearHistoryBtn" class="btn btn-danger" style="margin-top:8px;">履歴をクリア</button>
+            </section>
         </main>
     </div>
+
+    <script>
+        const selectLabels = { option1: 'オプション1', option2: 'オプション2', option3: 'オプション3' };
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            const list = document.getElementById('historyList');
+            const empty = document.getElementById('historyEmpty');
+            if (history.length === 0) {
+                list.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            list.innerHTML = history.map(s => {
+                const date = new Date(s.submittedAt).toLocaleString('ja-JP');
+                return `<li style="padding:6px 0;border-bottom:1px solid #ddd;">${date} ／ ${s.testInput} ／ ${selectLabels[s.testSelect] || s.testSelect}</li>`;
+            }).join('');
+        }
+
+        document.getElementById('testForm').addEventListener('submit', function () {
+            const submission = {
+                id: Date.now(),
+                testInput: document.getElementById('testInput').value,
+                testSelect: document.getElementById('testSelect').value,
+                submittedAt: new Date().toISOString()
+            };
+            const history = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            history.unshift(submission);
+            localStorage.setItem('formSubmissions', JSON.stringify(history));
+        });
+
+        document.getElementById('clearHistoryBtn').addEventListener('click', function () {
+            localStorage.removeItem('formSubmissions');
+            renderHistory();
+        });
+
+        renderHistory();
+    </script>
 </body>
 </html>
